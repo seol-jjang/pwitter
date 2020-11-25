@@ -33,14 +33,13 @@ const CreateAccount = () => {
       });
     } catch (error) {
       const errorCode = error.code;
+      setNewAccount(false);
       if (errorCode === "auth/invalid-email") {
         alert("올바른 이메일 형식이 아닙니다");
       } else if (errorCode === "auth/email-already-in-use") {
         alert("이미 사용 중인 이메일입니다");
       } else if (errorCode === "auth/weak-password") {
         alert("비밀번호를 최소 6자리이상 입력해주세요");
-      } else {
-        console.log(error);
       }
     }
   };

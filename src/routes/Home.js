@@ -3,7 +3,7 @@ import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from "uuid";
 import Tweet from "components/Tweet";
 
-const Home = ({ userObj, userName }) => {
+const Home = ({ userObj }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
   const [attachment, setAttachment] = useState("");
@@ -34,8 +34,8 @@ const Home = ({ userObj, userName }) => {
     }
     const tweetObj = {
       text: tweet,
-      userName,
       attachmentUrl,
+      userName: userObj.displayName,
       createAt: Date.now(),
       creatorId: userObj.uid
     };
@@ -88,7 +88,6 @@ const Home = ({ userObj, userName }) => {
           <Tweet
             key={tweet.id}
             tweetObj={tweet}
-            name={tweet.userName}
             isOwner={tweet.creatorId === userObj.uid}
           />
         ))}

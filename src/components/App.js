@@ -6,12 +6,16 @@ function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
-  const [userName, setUserName] = useState("");
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLoggedIn(true);
-        setUserObj(user);
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          photoUrl: user.photoURL,
+          updateProfile: (args) => user.updateProfile(args)
+        });
         getUserName(user);
       } else {
         setIsLoggedIn(false);
@@ -19,13 +23,26 @@ function App() {
       setInit(true);
     });
   }, []);
-  const getUserName = async (user) => {
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      photoUrl: user.photoURL,
+      updateProfile: (args) => user.updateProfile(args)
+    });
+  };
+  const getUserName = (user) => {
     dbService
       .collection("users")
       .doc(`${user.uid}`)
       .onSnapshot((snapshot) => {
         const data = snapshot.data();
-        setUserName(data.name);
+        if (user.displayName === null) {
+          user.updateProfile({
+            displayName: data.name
+          });
+        }
       });
   };
   return (
@@ -33,8 +50,8 @@ function App() {
       {init ? (
         <AppRouter
           userObj={userObj}
-          userName={userName}
           isLoggedIn={isLoggedIn}
+          refreshUser={refreshUser}
         />
       ) : (
         "initializing.."

@@ -30,8 +30,6 @@ const Auth = () => {
         alert("아이디 혹은 비밀번호가 일치하지 않습니다");
       } else if (errorCode === "auth/wrong-password") {
         alert("아이디 혹은 비밀번호가 일치하지 않습니다");
-      } else {
-        console.log(error);
       }
     }
   };
