@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AppRouter from "components/Router";
 import { authService, dbService } from "fbase";
+import { ThemeProvider } from "styled-components";
+import AppRouter from "components/Router";
+import GlobalStyles from "styles/GlobalStyles";
+import { theme } from "styles/Theme";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -47,15 +50,18 @@ function App() {
   };
   return (
     <>
-      {init ? (
-        <AppRouter
-          userObj={userObj}
-          isLoggedIn={isLoggedIn}
-          refreshUser={refreshUser}
-        />
-      ) : (
-        "initializing.."
-      )}
+      <ThemeProvider theme={{ theme }}>
+        <GlobalStyles />
+        {init ? (
+          <AppRouter
+            userObj={userObj}
+            isLoggedIn={isLoggedIn}
+            refreshUser={refreshUser}
+          />
+        ) : (
+          "initializing.."
+        )}
+      </ThemeProvider>
     </>
   );
 }

@@ -22,11 +22,11 @@ const CreateAccount = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      setNewAccount(true);
       const data = await authService.createUserWithEmailAndPassword(
         email,
         password
       );
+      setNewAccount(true);
       await dbService.collection("users").doc(`${data.user.uid}`).set({
         uid: data.user.uid,
         name: nickname

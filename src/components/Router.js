@@ -35,7 +35,7 @@ const AppRouter = ({ userObj, isLoggedIn, refreshUser }) => {
           </>
         )}
       </Switch>
-      <Route exact path="/join">
+      <Route exact path="/signup">
         <CreateAccount />
       </Route>
       <Redirect from="*" to="/" />
