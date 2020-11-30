@@ -24,7 +24,7 @@ const Home = ({ userObj }) => {
   return (
     <HomeSection>
       <TweetFactory userObj={userObj} />
-      <div>
+      <section>
         {tweets.map((tweet) => (
           <Tweet
             key={tweet.id}
@@ -32,12 +32,13 @@ const Home = ({ userObj }) => {
             isOwner={tweet.creatorId === userObj.uid}
           />
         ))}
-      </div>
+      </section>
     </HomeSection>
   );
 };
 
 const HomeSection = styled.div`
+  width: 100%;
   background-color: #eeeeee;
 `;
 

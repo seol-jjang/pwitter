@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const TweetArticle = styled.div`
   display: flex;
@@ -10,14 +10,41 @@ const TweetArticle = styled.div`
   font-size: 16px;
   letter-spacing: -0.5px;
   h6 {
+    margin: 5px 0;
     font-weight: bold;
   }
-  p {
-    margin: 8px 0 10px;
+  textarea {
+    margin-bottom: 15px;
   }
-  img {
+  .tweet-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .btn-group {
+      justify-self: end;
+      button {
+        font-size: 12px;
+        &:first-child {
+          margin-right: 3px;
+        }
+      }
+    }
+    p {
+      margin: 10px 0 13px;
+      grid-column: span 2;
+    }
+  }
+
+  .btn-group {
+    display: flex;
+  }
+  .img-preview {
+    position: relative;
     cursor: pointer;
-    border-radius: 30px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
   }
 `;
 

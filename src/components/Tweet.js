@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Section } from "styles/Theme";
 import Button from "./Button";
+import ImageModal from "./ImageModal";
+import { TweetText } from "./TweetFactory";
 import TweetStyle from "./TweetStyle";
 
 const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweetObj.text);
+  const [showModal, setShowModal] = useState(false);
   const onDeleteClick = async () => {
     const ok = window.confirm("삭제하시겠습니까?");
     if (ok) {
@@ -31,46 +34,77 @@ const Tweet = ({ tweetObj, isOwner }) => {
     } = event;
     setNewTweet(value);
   };
-  const onClickPhoto = (event) => {};
+  const onResize = (event) => {
+    const textarea = event.target;
+    textarea.style.height = textarea.scrollHeight + "px";
+  };
+  const openModal = () => {
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  const bgImage = {
+    backgroundImage: `url(${tweetObj.attachmentUrl})`
+  };
   return (
-    <div>
+    <article>
       {editing ? (
-        <>
-          <form onSubmit={onSubmit}>
-            <input
-              value={newTweet}
-              onChange={onChange}
-              type="text"
-              placeholder="수정사항 입력"
-              required
-            />
-            <Button as="input" type="submit" value="확인" />
-          </form>
-          <Button onClick={onToggleEditing}>취소</Button>
-        </>
-      ) : (
         <TweetStyle>
           <h6>{tweetObj.userName}</h6>
-          <p>{tweetObj.text}</p>
+          <form onSubmit={onSubmit}>
+            <TweetText
+              value={newTweet}
+              onChange={onChange}
+              onKeyDown={onResize}
+              onKeyUp={onResize}
+              placeholder="수정 사항 입력"
+              cols="50"
+              rows="2"
+              maxLength={120}
+            />
+            <Button as="input" type="submit" value="확인" size="full" />
+          </form>
+          <Button onClick={onToggleEditing} color="white" cancelBtn>
+            취소
+          </Button>
+        </TweetStyle>
+      ) : (
+        <TweetStyle>
+          <div className="tweet-info">
+            <h6>{tweetObj.userName}</h6>
+            {isOwner && (
+              <Section className="btn-group">
+                <Button onClick={onToggleEditing} color="white" editTweet>
+                  수정
+                </Button>
+                <Button onClick={onDeleteClick} color="white" deleteTweet>
+                  삭제
+                </Button>
+              </Section>
+            )}
+            <p>{tweetObj.text}</p>
+          </div>
           {tweetObj.attachmentUrl && (
             <>
-              <div className="img-preview"></div>
-              <img
-                src={tweetObj.attachmentUrl}
-                alt="img"
-                onClick={onClickPhoto}
-              />
+              <div
+                className="img-preview"
+                style={bgImage}
+                onClick={openModal}
+              ></div>
+              {showModal && (
+                <ImageModal
+                  imgUrl={tweetObj.attachmentUrl}
+                  visible={showModal}
+                  closable={true}
+                  onClose={closeModal}
+                />
+              )}
             </>
-          )}
-          {isOwner && (
-            <Section>
-              <Button onClick={onToggleEditing}>수정</Button>
-              <Button onClick={onDeleteClick}>삭제</Button>
-            </Section>
           )}
         </TweetStyle>
       )}
-    </div>
+    </article>
   );
 };
 

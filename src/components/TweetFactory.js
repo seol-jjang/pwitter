@@ -83,7 +83,7 @@ const TweetFactory = ({ userObj }) => {
       {attachment && (
         <TweetPreview>
           <img src={attachment} alt="img" />
-          <Button onClick={onClearAttachmentClick} deleteBtn>
+          <Button color="black" onClick={onClearAttachmentClick} deletePhoto>
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </TweetPreview>
@@ -112,7 +112,7 @@ const TweetForm = styled.form`
   }
 `;
 
-const TweetText = styled.textarea`
+export const TweetText = styled.textarea`
   width: 100%;
   margin-top: 5px;
   border: none;

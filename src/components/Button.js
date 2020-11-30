@@ -3,17 +3,58 @@ import styled, { css } from "styled-components";
 
 const colorStyles = css`
   /* 색상 */
-  ${({ theme, color, deleteBtn }) => {
+  ${({
+    theme,
+    color,
+    deletePhoto,
+    editTweet,
+    deleteTweet,
+    closeModal,
+    cancelBtn
+  }) => {
     const selected = theme.theme[color];
-    const fontColor = color === "skyblue" ? "white" : "gray";
-    if (deleteBtn) {
+    const fontColor = color === "skyblue" ? "white" : theme.theme.gray;
+    if (deletePhoto || closeModal) {
       return css`
         padding: 10px 13px;
-        background-color: black;
+        background-color: ${selected};
         border-radius: 50%;
         opacity: 0.7;
         color: white;
         font-size: 12px;
+      `;
+    } else if (editTweet || deleteTweet || cancelBtn) {
+      if (cancelBtn) {
+        return css`
+          padding: 10px 15px;
+          font-size: 14px;
+          background-color: ${selected};
+          color: ${fontColor};
+          border: 1px solid ${fontColor};
+          &:hover {
+            background-color: darkgray;
+            color: white;
+          }
+          &:active {
+            background-color: darkgray;
+            color: white;
+          }
+        `;
+      }
+      return css`
+        padding: 5px 13px;
+        font-size: 12px;
+        background-color: ${selected};
+        color: ${fontColor};
+        border: 1px solid ${fontColor};
+        &:hover {
+          background-color: darkgray;
+          color: white;
+        }
+        &:active {
+          background-color: darkgray;
+          color: white;
+        }
       `;
     }
     return css`

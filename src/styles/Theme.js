@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const theme = {
   skyblue: "#1da1f3",
-  white: "#ffffff",
   darkblue: "#339af0",
-  gray: "#e2e2e2"
+  white: "#ffffff",
+  gray: "#aaa",
+  black: "#000"
 };
 
 export const SectionColumn = styled.div`
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
