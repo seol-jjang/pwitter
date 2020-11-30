@@ -1,5 +1,9 @@
 import React from "react";
 import { authService, dbService, firebaseInstance } from "fbase";
+import Button from "./Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+import styled from "styled-components";
 
 const SocialAuth = () => {
   const onSocialClick = async (event) => {
@@ -19,15 +23,20 @@ const SocialAuth = () => {
     });
   };
   return (
-    <>
-      <button onClick={onSocialClick} name="google">
-        구글계정으로 시작하기
-      </button>
-      <button onClick={onSocialClick} name="github">
-        깃허브계정으로 시작하기
-      </button>
-    </>
+    <MainSection>
+      <Button onClick={onSocialClick} name="google" color="white">
+        <FontAwesomeIcon icon={faGoogle} /> 구글계정으로 시작하기
+      </Button>
+      <Button onClick={onSocialClick} name="github" color="white">
+        <FontAwesomeIcon icon={faGithub} /> 깃허브계정으로 시작하기
+      </Button>
+    </MainSection>
   );
 };
 
 export default SocialAuth;
+
+const MainSection = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

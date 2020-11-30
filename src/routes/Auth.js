@@ -21,5 +21,4 @@ export default Auth;
 
 const LoginSection = styled.div`
   width: 400px;
-  margin: 10% auto;
 `;

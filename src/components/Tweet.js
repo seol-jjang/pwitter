@@ -1,5 +1,9 @@
 import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
+import styled from "styled-components";
+import { Section } from "styles/Theme";
+import Button from "./Button";
+import TweetStyle from "./TweetStyle";
 
 const Tweet = ({ tweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -27,6 +31,7 @@ const Tweet = ({ tweetObj, isOwner }) => {
     } = event;
     setNewTweet(value);
   };
+  const onClickPhoto = (event) => {};
   return (
     <div>
       {editing ? (
@@ -39,31 +44,31 @@ const Tweet = ({ tweetObj, isOwner }) => {
               placeholder="수정사항 입력"
               required
             />
-            <input type="submit" value="확인" />
+            <Button as="input" type="submit" value="확인" />
           </form>
-          <button onClick={onToggleEditing}>취소</button>
+          <Button onClick={onToggleEditing}>취소</Button>
         </>
       ) : (
-        <>
+        <TweetStyle>
           <h6>{tweetObj.userName}</h6>
-          <h4>{tweetObj.text}</h4>
+          <p>{tweetObj.text}</p>
           {tweetObj.attachmentUrl && (
-            <div>
+            <>
+              <div className="img-preview"></div>
               <img
                 src={tweetObj.attachmentUrl}
-                width="500px"
-                height="350px"
                 alt="img"
+                onClick={onClickPhoto}
               />
-            </div>
-          )}
-          {isOwner && (
-            <>
-              <button onClick={onToggleEditing}>수정</button>
-              <button onClick={onDeleteClick}>삭제</button>
             </>
           )}
-        </>
+          {isOwner && (
+            <Section>
+              <Button onClick={onToggleEditing}>수정</Button>
+              <Button onClick={onDeleteClick}>삭제</Button>
+            </Section>
+          )}
+        </TweetStyle>
       )}
     </div>
   );

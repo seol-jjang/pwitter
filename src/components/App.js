@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fbase";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import AppRouter from "components/Router";
 import GlobalStyles from "styles/GlobalStyles";
-import { theme } from "styles/Theme";
+import { theme, SectionColumn } from "styles/Theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -53,17 +55,32 @@ function App() {
       <ThemeProvider theme={{ theme }}>
         <GlobalStyles />
         {init ? (
-          <AppRouter
-            userObj={userObj}
-            isLoggedIn={isLoggedIn}
-            refreshUser={refreshUser}
-          />
+          <SectionColumn>
+            <Logo as="a" href="/">
+              <FontAwesomeIcon
+                icon={faTwitter}
+                size="2x"
+                color={theme.skyblue}
+              />
+            </Logo>
+            <AppRouter
+              userObj={userObj}
+              isLoggedIn={isLoggedIn}
+              refreshUser={refreshUser}
+            />
+          </SectionColumn>
         ) : (
-          "initializing.."
+          ""
         )}
       </ThemeProvider>
     </>
   );
 }
+
+const Logo = styled.span`
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+`;
 
 export default App;

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { authService, dbService } from "fbase";
 import { Link } from "react-router-dom";
+import Input from "components/Input";
+import Button from "components/Button";
+import styled from "styled-components";
 
 const CreateAccount = () => {
   const [email, setEmail] = useState("");
@@ -50,43 +53,47 @@ const CreateAccount = () => {
           회원가입성공!<p>메인으로 이동합니다</p>
         </div>
       ) : (
-        <>
-          <Link to="/" replace>
-            뒤로
-          </Link>
-          <div>
-            <form onSubmit={onSubmit}>
-              <input
-                onChange={onChange}
-                value={email}
-                name="email"
-                type="text"
-                placeholder="이메일"
-                required
-              />
-              <input
-                onChange={onChange}
-                value={password}
-                name="password"
-                type="password"
-                placeholder="비밀번호"
-                required
-              />
-              <input
-                onChange={onChange}
-                value={nickname}
-                name="nickname"
-                type="text"
-                placeholder="이름"
-                required
-              />
-              <input type="submit" value="가입하기" />
-            </form>
-          </div>
-        </>
+        <div>
+          <Form onSubmit={onSubmit}>
+            <Input
+              onChange={onChange}
+              value={email}
+              name="email"
+              type="text"
+              placeholder="이메일"
+              required
+            />
+            <Input
+              onChange={onChange}
+              value={password}
+              name="password"
+              type="password"
+              placeholder="비밀번호"
+              required
+            />
+            <Input
+              onChange={onChange}
+              value={nickname}
+              name="nickname"
+              type="text"
+              placeholder="이름"
+              required
+            />
+            <Button as="input" type="submit" value="가입하기" />
+          </Form>
+        </div>
       )}
     </>
   );
 };
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  input {
+    margin-bottom: 10px;
+  }
+`;
 
 export default CreateAccount;

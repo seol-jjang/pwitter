@@ -3,16 +3,23 @@ import styled, { css } from "styled-components";
 
 const colorStyles = css`
   /* 색상 */
-  ${({ theme, color }) => {
+  ${({ theme, color, deleteBtn }) => {
     const selected = theme.theme[color];
-    const fontColor = color === "skyblue" ? "white" : "skyblue";
+    const fontColor = color === "skyblue" ? "white" : "gray";
+    if (deleteBtn) {
+      return css`
+        padding: 10px 13px;
+        background-color: black;
+        border-radius: 50%;
+        opacity: 0.7;
+        color: white;
+        font-size: 12px;
+      `;
+    }
     return css`
       background-color: ${selected};
       color: ${fontColor};
-      border: 1px solid ${fontColor}
-      &:hover {
-        background-color: ${selected};
-      }
+      border: 1px solid ${fontColor};
       &:active {
         background-color: ${selected};
       }
@@ -33,20 +40,16 @@ const StyleButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  outline: none;
+  margin-bottom: 5px;
+  padding: 10px 15px;
   border: none;
   border-radius: 30px;
+  outline: none;
+  font-size: 14px;
   cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
 
   ${colorStyles}
   ${sizeStyles}
-
-  & + & {
-    margin-left: 1rem;
-  }
 `;
 
 const Button = ({ children, ...rest }) => {

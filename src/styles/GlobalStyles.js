@@ -2,13 +2,20 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
   ${reset}
   * {
     box-sizing: border-box;
+    font-family: 'NanumSquareRound';
   }
   body{
     background-color: #ffffff;
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-family: 'NanumSquareRound';
   }
   a {
     color: inherit;

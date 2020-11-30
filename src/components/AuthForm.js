@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { authService } from "fbase";
 import Button from "./Button";
+import Input from "./Input";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const AuthForm = () => {
   };
   return (
     <Form onSubmit={onSubmit}>
-      <input
+      <Input
         onChange={onChange}
         name="email"
         value={email}
@@ -43,7 +44,7 @@ const AuthForm = () => {
         placeholder="이메일"
         required
       />
-      <input
+      <Input
         onChange={onChange}
         name="password"
         value={password}
@@ -51,9 +52,7 @@ const AuthForm = () => {
         placeholder="비밀번호"
         required
       />
-      <Button color="white" size="full">
-        <input type="submit" value="로그인" />
-      </Button>
+      <Button as="input" type="submit" value="로그인" />
     </Form>
   );
 };
@@ -63,4 +62,8 @@ export default AuthForm;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
+  input {
+    margin-top: 8px;
+  }
 `;
