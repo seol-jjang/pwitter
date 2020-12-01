@@ -22,7 +22,6 @@ const TweetArticle = styled.div`
     .btn-group {
       justify-self: end;
       button {
-        font-size: 12px;
         &:first-child {
           margin-right: 3px;
         }
@@ -33,14 +32,10 @@ const TweetArticle = styled.div`
       grid-column: span 2;
     }
   }
-
-  .btn-group {
-    display: flex;
-  }
   .img-preview {
     position: relative;
     cursor: pointer;
-    height: 250px;
+    height: 280px;
     background-size: cover;
     background-position: center;
     border: 1px solid #ccc;

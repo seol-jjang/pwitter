@@ -10,10 +10,11 @@ const colorStyles = css`
     editTweet,
     deleteTweet,
     closeModal,
-    cancelBtn
+    cancelBtn,
+    logoutBtn
   }) => {
     const selected = theme.theme[color];
-    const fontColor = color === "skyblue" ? "white" : theme.theme.gray;
+    const fontColor = color === "skyblue" ? "white" : theme.theme.skyblue;
     if (deletePhoto || closeModal) {
       return css`
         padding: 10px 13px;
@@ -23,14 +24,14 @@ const colorStyles = css`
         color: white;
         font-size: 12px;
       `;
-    } else if (editTweet || deleteTweet || cancelBtn) {
+    } else if (editTweet || deleteTweet || cancelBtn || logoutBtn) {
       if (cancelBtn) {
         return css`
           padding: 10px 15px;
           font-size: 14px;
           background-color: ${selected};
-          color: ${fontColor};
-          border: 1px solid ${fontColor};
+          color: ${theme.theme.gray};
+          border: 1px solid ${theme.theme.gray};
           &:hover {
             background-color: darkgray;
             color: white;
@@ -45,8 +46,8 @@ const colorStyles = css`
         padding: 5px 13px;
         font-size: 12px;
         background-color: ${selected};
-        color: ${fontColor};
-        border: 1px solid ${fontColor};
+        color: ${theme.theme.gray};
+        border: 1px solid ${theme.theme.gray};
         &:hover {
           background-color: darkgray;
           color: white;
